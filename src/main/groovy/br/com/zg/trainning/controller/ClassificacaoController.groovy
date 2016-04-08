@@ -20,4 +20,8 @@ class ClassificacaoController {
 		Map<Integer, Time> timesOrdenados = classificacao2015.aplicaCriteriosDesempate(campeonato.timesParticipantes)
 		return classificacao2015.obterTimeCampeao(timesOrdenados)
 	}
+
+	List<Time> obterTabelaClassificacao(Campeonato campeonato){
+		return classificacao2015.realizaClassificacao(campeonato)
+	}
 }
