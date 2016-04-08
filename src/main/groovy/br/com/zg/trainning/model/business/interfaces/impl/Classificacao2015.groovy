@@ -8,10 +8,17 @@ import br.com.zg.trainning.model.entities.Time
  * Created by luizhenrique on 07/04/16.
  */
 class Classificacao2015 implements Classificacao {
-	Map<Integer, Time> realizaClassificacao(Campeonato campeonato) {
-		CalculoPontuacao2015 calculoPontuacao2015 = new CalculoPontuacao2015()
-		Map<Integer, Time> timesOrdenados = aplicaCriteriosDesempate(times)
-		return null
+	List<Time> realizaClassificacao(Campeonato campeonato) {
+		Map<Integer, Time> timesOrdenadosMenorParaMaior = aplicaCriteriosDesempate(campeonato.timesParticipantes)
+		Map<Integer, Time> timesOrdenadoPorClassificacao
+		timesOrdenadoPorClassificacao = timesOrdenadosMenorParaMaior.sort { timeA, timeB ->
+			timeB.key <=> timeA.key
+		}
+		List<Time> listaTimesOrdenadosPorClassificacao = []
+		timesOrdenadoPorClassificacao.each {
+			listaTimesOrdenadosPorClassificacao += it.value
+		}
+		return listaTimesOrdenadosPorClassificacao
 	}
 
 	Map<Integer, Time> aplicaCriteriosDesempate(List<Time> times) {
