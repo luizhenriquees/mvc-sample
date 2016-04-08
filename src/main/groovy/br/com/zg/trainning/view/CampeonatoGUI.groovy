@@ -16,6 +16,10 @@ class CampeonatoGUI {
 	static List<Campeonato> listaCampeonatos = [];
 
 	public static void main(String[] args) {
+		executaPrograma()
+	}
+
+	public static void executaPrograma() {
 		cadastrarCampeonato()
 		cadastrarTimes()
 		criaMenuSistema()
@@ -67,6 +71,7 @@ class CampeonatoGUI {
 			println "Selecione uma operação"
 			println "[1] Saber o campeão"
 			println "[2] Saber o lanterna"
+			println "[3] Exibir tabela"
 			println "[0] Encerrar"
 
 			opcaoEscolhida = br.readLine().toInteger()
@@ -84,12 +89,23 @@ class CampeonatoGUI {
 				ClassificacaoController classificacaoController = new ClassificacaoController()
 				println("O lanterna é o ${classificacaoController.obterTimeLanterna(campeonato).nome}")
 				break
+			case 3:
+				ClassificacaoController classificacaoController = new ClassificacaoController()
+				List<Time> listaOrdenada = classificacaoController.obterTabelaClassificacao(campeonato)
+				imprimirTabela(listaOrdenada)
+				break
 			case 0:
 				println('Programa encerrado')
 				break
 			default:
 				println('Opção inválida')
 				break
+		}
+	}
+
+	private static void imprimirTabela(List<Time> listaOrdenada) {
+		listaOrdenada.eachWithIndex { time, posicao ->
+			println("${posicao+1} ${time.nome}")
 		}
 	}
 }
