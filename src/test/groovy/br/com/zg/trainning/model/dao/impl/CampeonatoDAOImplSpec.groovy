@@ -10,7 +10,7 @@ import spock.lang.Specification
  */
 class CampeonatoDAOImplSpec extends Specification {
 
-	def "Salvar"() {
+	def "Salvar campeonato na lista"() {
 		setup:
 		Campeonato campeonato = new Campeonato()
 		CampeonatoDAO campeonatoDAO = new CampeonatoDAOImpl()
@@ -25,7 +25,7 @@ class CampeonatoDAOImplSpec extends Specification {
 		campeonatos.size() == 1
 	}
 
-	def "SalvarTimes"() {
+	def "Salvar times no campeonato"() {
 		setup: "criação do campeonato e dos times que irão fazer parte do mesmo"
 		Campeonato campeonato = new Campeonato()
 		CampeonatoDAO campeonatoDAO = new CampeonatoDAOImpl()

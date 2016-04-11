@@ -9,7 +9,7 @@ import spock.lang.Specification
  */
 class TimeDAOImplSpec extends Specification {
 
-	def "Salvar"() {
+	def "Salvar time na lista"() {
 		setup:
 		TimeDAO timeDAO = new TimeDAOImpl()
 		Time time = new Time()
