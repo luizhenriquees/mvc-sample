@@ -38,4 +38,12 @@ class Classificacao2015 implements Classificacao {
 		}
 		return timesOrdenados
 	}
+
+	Time obterTimeCampeao(Map<Integer, Time> timesOrdenadosClassificacao) {
+		timesOrdenadosClassificacao.get(timesOrdenadosClassificacao.size() - 1)
+	}
+
+	Time obterTimeLanterna(Map<Integer, Time> timesOrdenadosClassificacao) {
+		timesOrdenadosClassificacao.get(0)
+	}
 }

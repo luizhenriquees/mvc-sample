@@ -2,16 +2,20 @@ package br.com.zg.trainning.model.business.interfaces.impl
 
 import br.com.zg.trainning.model.entities.Campeonato
 import br.com.zg.trainning.model.entities.Time
+import spock.lang.Shared
 import spock.lang.Specification
 
 /**
  * Created by luizhenrique on 08/04/16.
  */
 class Classificacao2015Spec extends Specification {
-	def "aplica critérios de desempate nos times"() {
-		setup:
-		Classificacao2015 classificacao2015 = new Classificacao2015()
-		List<Time> times = []
+
+	@Shared Classificacao2015 classificacao2015
+	@Shared List<Time> times
+
+	def setupSpec() {
+		classificacao2015 = new Classificacao2015()
+		times = []
 		/*7*/ times += new Time(nome: 'Corinthans', quantidadeVitorias: 10, quantidadeEmpates: 6, quantidadeGolsPro: 20, quantidadeGolsContra: 2)
 		/*3*/ times += new Time(nome: 'Botafogo', quantidadeVitorias: 5, quantidadeEmpates: 3, quantidadeGolsPro: 15, quantidadeGolsContra: 7)
 		/*2*/ times += new Time(nome: 'Palmeiras', quantidadeVitorias: 5, quantidadeEmpates: 3, quantidadeGolsPro: 10, quantidadeGolsContra: 2)
@@ -21,6 +25,9 @@ class Classificacao2015Spec extends Specification {
 		/*5*/ times += new Time(nome: 'Flamengo', quantidadeVitorias: 6, quantidadeEmpates: 0, quantidadeGolsPro: 11, quantidadeGolsContra: 2)
 		/*6*/ times += new Time(nome: 'Real Madrid', quantidadeVitorias: 7, quantidadeEmpates: 1, quantidadeGolsPro: 22, quantidadeGolsContra: 2)
 
+
+	}
+	def "aplica critérios de desempate nos times"() {
 		when:
 		Map<Integer, Time> timesOrdenados = classificacao2015.aplicaCriteriosDesempate(times)
 
@@ -33,5 +40,28 @@ class Classificacao2015Spec extends Specification {
 		timesOrdenados.get(5).nome == 'Flamengo'
 		timesOrdenados.get(6).nome == 'Real Madrid'
 		timesOrdenados.get(7).nome == 'Corinthans'
+	}
+
+	def "obtem o time lanterna do campeonato"() {
+		setup:
+		Map<Integer, Time> timesOrdenados = classificacao2015.aplicaCriteriosDesempate(times)
+
+		when:
+		Time timeLanterna = classificacao2015.obterTimeLanterna(timesOrdenados)
+
+		then:
+		timeLanterna.nome == 'São Paulo'
+
+	}
+
+	def "obtem o time campeão do campeonato"() {
+		setup:
+		Map<Integer, Time> timesOrdenados = classificacao2015.aplicaCriteriosDesempate(times)
+
+		when:
+		Time timeCampeao = classificacao2015.obterTimeCampeao(timesOrdenados)
+
+		then:
+		timeCampeao.nome == 'Corinthans'
 	}
 }
