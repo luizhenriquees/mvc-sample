@@ -4,8 +4,8 @@ package br.com.zg.trainning.model.entities
  */
 class Campeonato {
 
-	private String nome
-	private int anoCampeonato
-	private int quantidadeRodadas
-	private List<Time> timesParticipantes
+	String nome
+	int anoCampeonato
+	int quantidadeRodadas
+	List<Time> timesParticipantes
 }

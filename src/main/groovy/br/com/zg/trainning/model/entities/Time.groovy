@@ -5,10 +5,10 @@ package br.com.zg.trainning.model.entities
  */
 class Time {
 
-	private String nome
-	private int quantidadeVitorias
-	private int quantidadeDerrotas
-	private int quantidadeEmpates
-	private int quantidadeGolsPro
-	private int quantidadeGolsContra
+	String nome
+	int quantidadeVitorias
+	int quantidadeDerrotas
+	int quantidadeEmpates
+	int quantidadeGolsPro
+	int quantidadeGolsContra
 }
