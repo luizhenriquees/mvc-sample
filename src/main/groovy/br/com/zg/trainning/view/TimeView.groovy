@@ -16,7 +16,5 @@ interface TimeView {
 
 	String pergunteQuantidadeDeGolsContra()
 
-	void notifiqueAdicaoDeTimes()
-
 	String pergunteSeMaisTimes()
 }

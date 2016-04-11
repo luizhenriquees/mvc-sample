@@ -7,5 +7,5 @@ class Campeonato {
 	String nome
 	int anoCampeonato
 	int quantidadeRodadas
-	List<Time> timesParticipantes
+	List<Time> timesParticipantes  = []
 }
