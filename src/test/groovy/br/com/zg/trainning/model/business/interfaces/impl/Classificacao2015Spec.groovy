@@ -12,19 +12,21 @@ class Classificacao2015Spec extends Specification {
 
 	@Shared Classificacao2015 classificacao2015
 	@Shared List<Time> times
+	@Shared Campeonato campeonato
 
 	def setupSpec() {
 		classificacao2015 = new Classificacao2015()
+		campeonato = new Campeonato()
 		times = []
-		/*7*/ times += new Time(nome: 'Corinthans', quantidadeVitorias: 10, quantidadeEmpates: 6, quantidadeGolsPro: 20, quantidadeGolsContra: 2)
-		/*3*/ times += new Time(nome: 'Botafogo', quantidadeVitorias: 5, quantidadeEmpates: 3, quantidadeGolsPro: 15, quantidadeGolsContra: 7)
-		/*2*/ times += new Time(nome: 'Palmeiras', quantidadeVitorias: 5, quantidadeEmpates: 3, quantidadeGolsPro: 10, quantidadeGolsContra: 2)
-		/*1*/ times += new Time(nome: 'Fluminense', quantidadeVitorias: 2, quantidadeEmpates: 3, quantidadeGolsPro: 10, quantidadeGolsContra: 2)
-		/*0*/ times += new Time(nome: 'São Paulo', quantidadeVitorias: 0, quantidadeEmpates: 5, quantidadeGolsPro: 10, quantidadeGolsContra: 2)
+		/*1*/ times += new Time(nome: 'Corinthans', quantidadeVitorias: 10, quantidadeEmpates: 6, quantidadeGolsPro: 20, quantidadeGolsContra: 2)
+		/*5*/ times += new Time(nome: 'Botafogo', quantidadeVitorias: 5, quantidadeEmpates: 3, quantidadeGolsPro: 15, quantidadeGolsContra: 7)
+		/*6*/ times += new Time(nome: 'Palmeiras', quantidadeVitorias: 5, quantidadeEmpates: 3, quantidadeGolsPro: 10, quantidadeGolsContra: 2)
+		/*7*/ times += new Time(nome: 'Fluminense', quantidadeVitorias: 2, quantidadeEmpates: 3, quantidadeGolsPro: 10, quantidadeGolsContra: 2)
+		/*8*/ times += new Time(nome: 'São Paulo', quantidadeVitorias: 0, quantidadeEmpates: 5, quantidadeGolsPro: 10, quantidadeGolsContra: 2)
 		/*4*/ times += new Time(nome: 'Barcelona', quantidadeVitorias: 6, quantidadeEmpates: 0, quantidadeGolsPro: 12, quantidadeGolsContra: 4)
-		/*5*/ times += new Time(nome: 'Flamengo', quantidadeVitorias: 6, quantidadeEmpates: 0, quantidadeGolsPro: 11, quantidadeGolsContra: 2)
-		/*6*/ times += new Time(nome: 'Real Madrid', quantidadeVitorias: 7, quantidadeEmpates: 1, quantidadeGolsPro: 22, quantidadeGolsContra: 2)
-
+		/*3*/ times += new Time(nome: 'Flamengo', quantidadeVitorias: 6, quantidadeEmpates: 0, quantidadeGolsPro: 11, quantidadeGolsContra: 2)
+		/*2*/ times += new Time(nome: 'Real Madrid', quantidadeVitorias: 7, quantidadeEmpates: 1, quantidadeGolsPro: 22, quantidadeGolsContra: 2)
+		campeonato.timesParticipantes = times
 
 	}
 	def "aplica critérios de desempate nos times"() {
@@ -63,5 +65,17 @@ class Classificacao2015Spec extends Specification {
 
 		then:
 		timeCampeao.nome == 'Corinthans'
+	}
+
+	def "realiza a classificação dos times"() {
+
+		when:
+		List<Time> timesOrdenadosClassificacao = classificacao2015.realizaClassificacao(campeonato)
+
+		then:
+		timesOrdenadosClassificacao.get(0).nome == 'Corinthans'
+		timesOrdenadosClassificacao.get(1).nome == 'Real Madrid'
+		timesOrdenadosClassificacao.get(3).nome == 'Barcelona'
+		timesOrdenadosClassificacao.get(timesOrdenadosClassificacao.size() -1 ).nome == 'São Paulo'
 	}
 }

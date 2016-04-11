@@ -8,7 +8,7 @@ import br.com.zg.trainning.model.entities.Time
  */
 interface Classificacao {
 
-	Map<Integer, Time> realizaClassificacao(Campeonato campeonato)
+	List<Time> realizaClassificacao(Campeonato campeonato)
 
 	Map<Integer, Time> aplicaCriteriosDesempate(List<Time> times)
 
