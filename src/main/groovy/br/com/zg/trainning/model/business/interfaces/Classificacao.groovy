@@ -10,9 +10,9 @@ interface Classificacao {
 
 	List<Time> realizaClassificacao(Campeonato campeonato)
 
-	Map<Integer, Time> aplicaCriteriosDesempate(List<Time> times)
+	List<Time> aplicaCriteriosDesempate(List<Time> times)
 
-	Time obterTimeCampeao(Map<Integer, Time> timesOrdenadosClassificacao)
+	Time obterTimeCampeao(Campeonato campeonato)
 
-	Time obterTimeLanterna(Map<Integer, Time> timesOrdenadosClassificacao)
+	Time obterTimeLanterna(Campeonato campeonato)
 }

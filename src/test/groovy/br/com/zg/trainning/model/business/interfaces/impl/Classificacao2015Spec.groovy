@@ -31,25 +31,22 @@ class Classificacao2015Spec extends Specification {
 	}
 	def "aplica critérios de desempate nos times"() {
 		when:
-		Map<Integer, Time> timesOrdenados = classificacao2015.aplicaCriteriosDesempate(times)
+		List<Time> timesOrdenadosMenosPontosParaMaisPontos = classificacao2015.aplicaCriteriosDesempate(times)
 
 		then:
-		timesOrdenados.get(0).nome == 'São Paulo'
-		timesOrdenados.get(1).nome == 'Fluminense'
-		timesOrdenados.get(2).nome == 'Palmeiras'
-		timesOrdenados.get(3).nome == 'Botafogo'
-		timesOrdenados.get(4).nome == 'Barcelona'
-		timesOrdenados.get(5).nome == 'Flamengo'
-		timesOrdenados.get(6).nome == 'Real Madrid'
-		timesOrdenados.get(7).nome == 'Corinthans'
+		timesOrdenadosMenosPontosParaMaisPontos.get(0).nome == 'São Paulo'
+		timesOrdenadosMenosPontosParaMaisPontos.get(1).nome == 'Fluminense'
+		timesOrdenadosMenosPontosParaMaisPontos.get(2).nome == 'Palmeiras'
+		timesOrdenadosMenosPontosParaMaisPontos.get(3).nome == 'Botafogo'
+		timesOrdenadosMenosPontosParaMaisPontos.get(4).nome == 'Barcelona'
+		timesOrdenadosMenosPontosParaMaisPontos.get(5).nome == 'Flamengo'
+		timesOrdenadosMenosPontosParaMaisPontos.get(6).nome == 'Real Madrid'
+		timesOrdenadosMenosPontosParaMaisPontos.get(7).nome == 'Corinthans'
 	}
 
 	def "obtem o time lanterna do campeonato"() {
-		setup:
-		Map<Integer, Time> timesOrdenados = classificacao2015.aplicaCriteriosDesempate(times)
-
 		when:
-		Time timeLanterna = classificacao2015.obterTimeLanterna(timesOrdenados)
+		Time timeLanterna = classificacao2015.obterTimeLanterna(campeonato)
 
 		then:
 		timeLanterna.nome == 'São Paulo'
@@ -57,11 +54,8 @@ class Classificacao2015Spec extends Specification {
 	}
 
 	def "obtem o time campeão do campeonato"() {
-		setup:
-		Map<Integer, Time> timesOrdenados = classificacao2015.aplicaCriteriosDesempate(times)
-
 		when:
-		Time timeCampeao = classificacao2015.obterTimeCampeao(timesOrdenados)
+		Time timeCampeao = classificacao2015.obterTimeCampeao(campeonato)
 
 		then:
 		timeCampeao.nome == 'Corinthans'
