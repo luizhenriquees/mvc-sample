@@ -15,14 +15,17 @@ import br.com.zg.trainning.view.TimeView
 class MainApplication {
 
 	public static void main(String[] args) {
+		executaAplicacao()
+	}
 
+	static void executaAplicacao(){
 		TimeView timeView = new TimeLinhaDeComandoView()
 		CampeonatoView campeonatoView = new CampeonatoLinhaDeComandoView()
 		CampeonatoDAO campeonatoDAO = new CampeonatoDAOImpl()
-		CampeonatoBusiness campeonatoBusiness = new CampeonatoBusiness(campeonatoDAO)
 		Classificacao classificacao = new Classificacao2015()
-		TimeController timeController = new TimeController(campeonatoBusiness, timeView)
 
+		CampeonatoBusiness campeonatoBusiness = new CampeonatoBusiness(campeonatoDAO)
+		TimeController timeController = new TimeController(campeonatoBusiness, timeView)
 		CampeonatoController campeonatoController = new CampeonatoController(campeonatoBusiness, timeController, campeonatoView, classificacao)
 
 		campeonatoController.iniciaCampeonato()
