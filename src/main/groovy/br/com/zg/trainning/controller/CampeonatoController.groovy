@@ -22,7 +22,7 @@ class CampeonatoController {
 	private CampeonatoView campeonatoView
 	private Classificacao classificacao
 
-	CampeonatoController(CampeonatoBusiness campeonatoBusiness, TimeController timeController, CampeonatoView campeonatoView, Classificacao classificacao) {
+	public CampeonatoController(CampeonatoBusiness campeonatoBusiness, TimeController timeController, CampeonatoView campeonatoView, Classificacao classificacao) {
 		this.campeonatoBusiness = campeonatoBusiness
 		this.timeController = timeController
 		this.campeonatoView = campeonatoView

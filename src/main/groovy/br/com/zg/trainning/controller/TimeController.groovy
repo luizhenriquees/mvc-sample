@@ -33,17 +33,17 @@ class TimeController {
 
 		Time time = new Time(
 				nome: nome,
-				vitorias: vitorias,
-				empates: empates,
-				derrotas: derrotas,
-				golsPro: golsPro,
-				golsContra: golsContra
+				quantidadeVitorias: vitorias,
+				quantidadeEmpates: empates,
+				quantidadeDerrotas: derrotas,
+				quantidadeGolsPro: golsPro,
+				quantidadeGolsContra: golsContra
 		)
 
 		campeonato = campeonatoBusiness.adicionarTime(campeonato, time)
 		String maisTimes = timeView.pergunteSeMaisTimes()
 
-		if (maisTimes == 'S') {
+		if (maisTimes == 'S' || maisTimes == 's') {
 			adicioneTime(campeonato)
 		}
 
