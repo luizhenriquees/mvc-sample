@@ -14,8 +14,8 @@ class CampeonatoDAOImpl implements CampeonatoDAO{
 		return listaDeCampeonatos
 	}
 
-	Campeonato salvarTimes(Campeonato campeonato, List<Time> timesParticipantes){
-		campeonato.timesParticipantes = timesParticipantes
+	Campeonato adicionaTime(Campeonato campeonato, Time time) {
+		campeonato.timesParticipantes += time
 		return campeonato
 	}
 }
