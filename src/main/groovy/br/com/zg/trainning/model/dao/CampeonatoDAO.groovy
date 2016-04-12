@@ -10,5 +10,5 @@ import br.com.zg.trainning.model.entities.Time
 interface CampeonatoDAO {
 
 	List<Campeonato> salvar(List<Campeonato> listaDeCampeonatos, Campeonato campeonato)
-	Campeonato salvarTimes(Campeonato campeonato, List<Time> timesParticipantes)
+	Campeonato adicionaTime(Campeonato campeonato, Time time)
 }

@@ -29,14 +29,13 @@ class CampeonatoDAOImplSpec extends Specification {
 		setup: "criação do campeonato e dos times que irão fazer parte do mesmo"
 		Campeonato campeonato = new Campeonato()
 		CampeonatoDAO campeonatoDAO = new CampeonatoDAOImpl()
-		List<Time> timesParticipantes = []
 		Time time, time2
 		time = new Time(nome : 'Corinthans', quantidadeVitorias : 7)
 		time2 = new Time(nome : 'Palmeiras', quantidadeVitorias : 5)
-		timesParticipantes = [time, time2]
 
 		when: "dois times são inseridos no campeonato"
-		campeonato = campeonatoDAO.salvarTimes(campeonato, timesParticipantes)
+		campeonato = campeonatoDAO.adicionaTime(campeonato, time)
+		campeonato = campeonatoDAO.adicionaTime(campeonato, time2)
 
 		then: "o campeonato possui dois times participantes"
 		campeonato.timesParticipantes.size() == 2

@@ -1,16 +1,53 @@
 package br.com.zg.trainning.controller
 
-import br.com.zg.trainning.model.business.TimeBusiness
+import br.com.zg.trainning.model.business.CampeonatoBusiness
+
+import br.com.zg.trainning.model.entities.Campeonato
 import br.com.zg.trainning.model.entities.Time
+import br.com.zg.trainning.view.TimeView
 
 /**
  * Created by luizhenrique on 08/04/16.
  */
 class TimeController {
 
-	TimeBusiness timeBusiness = new TimeBusiness()
+	CampeonatoBusiness campeonatoBusiness
+	TimeView timeView
 
-	List<Time> salvarTime(List<Time> times, Time time){
-		timeBusiness.salvar(times, time)
+	TimeController(CampeonatoBusiness campeonatoBusiness, TimeView timeView) {
+		this.campeonatoBusiness = campeonatoBusiness
+		this.timeView = timeView
 	}
+
+	Campeonato adicioneTimes(Campeonato campeonato) {
+		adicioneTime(campeonato)
+	}
+
+	private Campeonato adicioneTime(Campeonato campeonato) {
+		String nome = timeView.pergunteNomeTime()
+		int vitorias = timeView.pergunteQuantidadeDeVitorias().toInteger()
+		int empates = timeView.pergunteQuantidadeDeEmpates().toInteger()
+		int derrotas = timeView.pergunteQuantidadeDeDerrotas().toInteger()
+		int golsPro = timeView.pergunteQuantidadeDeGolsPro().toInteger()
+		int golsContra = timeView.pergunteQuantidadeDeGolsContra().toInteger()
+
+		Time time = new Time(
+				nome: nome,
+				quantidadeVitorias: vitorias,
+				quantidadeEmpates: empates,
+				quantidadeDerrotas: derrotas,
+				quantidadeGolsPro: golsPro,
+				quantidadeGolsContra: golsContra
+		)
+
+		campeonato = campeonatoBusiness.adicionarTime(campeonato, time)
+		String maisTimes = timeView.pergunteSeMaisTimes()
+
+		if (maisTimes == 'S' || maisTimes == 's') {
+			adicioneTime(campeonato)
+		}
+
+		return campeonato
+	}
+
 }

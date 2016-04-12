@@ -8,22 +8,17 @@ import br.com.zg.trainning.model.entities.Time
  * Created by luizhenrique on 07/04/16.
  */
 class Classificacao2015 implements Classificacao {
+
 	List<Time> realizaClassificacao(Campeonato campeonato) {
-		Map<Integer, Time> timesOrdenadosMenorParaMaior = aplicaCriteriosDesempate(campeonato.timesParticipantes)
-		Map<Integer, Time> timesOrdenadoPorClassificacao
-		timesOrdenadoPorClassificacao = timesOrdenadosMenorParaMaior.sort { timeA, timeB ->
-			timeB.key <=> timeA.key
-		}
-		List<Time> listaTimesOrdenadosPorClassificacao = []
-		timesOrdenadoPorClassificacao.each {
-			listaTimesOrdenadosPorClassificacao += it.value
-		}
-		return listaTimesOrdenadosPorClassificacao
+		List<Time> timesOrdenadosMenorParaMaior = aplicaCriteriosDesempate(campeonato.timesParticipantes)
+
+		return timesOrdenadosMenorParaMaior.reverse()
 	}
 
-	Map<Integer, Time> aplicaCriteriosDesempate(List<Time> times) {
+	List<Time> aplicaCriteriosDesempate(List<Time> times) {
 		CalculoPontuacao2015 calculoPontuacao2015 = new CalculoPontuacao2015()
 		int saldoGolsTimeA, saldoGolsTimeB
+
 		times = times.sort { timeA, timeB ->
 			saldoGolsTimeA = timeA.quantidadeGolsPro - timeA.quantidadeGolsContra
 			saldoGolsTimeB = timeB.quantidadeGolsPro - timeB.quantidadeGolsContra
@@ -39,18 +34,14 @@ class Classificacao2015 implements Classificacao {
 			}
 		}
 
-		Map<Integer, Time> timesOrdenados = [:]
-		times.eachWithIndex { time, i ->
-			timesOrdenados.put(i, time)
-		}
-		return timesOrdenados
+		return times
 	}
 
-	Time obterTimeCampeao(Map<Integer, Time> timesOrdenadosClassificacao) {
-		timesOrdenadosClassificacao.get(timesOrdenadosClassificacao.size() - 1)
+	Time obterTimeCampeao(Campeonato campeonato) {
+		realizaClassificacao(campeonato).first()
 	}
 
-	Time obterTimeLanterna(Map<Integer, Time> timesOrdenadosClassificacao) {
-		timesOrdenadosClassificacao.get(0)
+	Time obterTimeLanterna(Campeonato campeonato) {
+		realizaClassificacao(campeonato).last()
 	}
 }
